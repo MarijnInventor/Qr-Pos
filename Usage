@@ -1,0 +1,24 @@
+Button functions:
+
+Pay = All prizes will be added up and placed at the bottom of the receipt.
+
+Undo = Delete the last scanned product.
+
+Clear = Delete all products and create a new empty receipt.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+*Keyboard shortcuts:
+
+[Delete] = Delete all products and create a new empty receipt.
+
+[Backspace] = Delete the last scanned product.
+
+[Enter] = All prizes will be added up and placed at the bottom of the receipt.
+
+[1] = Print the receipt on the printer you set in settings.py
+
+
+
+
+***For a complete guide, please read the README file.
