@@ -35,7 +35,7 @@ There is also a function to print the receipt on a physical printer. Just press 
 
 -------------
 
-# Keyboard shortcuts:
+**Keyboard shortcuts:**
 
 [Delete] = Delete all products and create a new empty receipt.
 
