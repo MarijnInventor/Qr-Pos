@@ -1,7 +1,7 @@
 # Qr-Pos
 A simple POS (point of sale) system with a qr code for each product.
 
-The purpose of this project is to make a well-functioning POS (point of sale) program that everyone can use for free.
+The purpose of this project is to make a well-functioning POS system that everyone can use for free.
 
 -------------
 # Preparation
@@ -47,3 +47,6 @@ There is also a function to print the receipt on a physical printer. Just press 
 
 -------------
 **I hope this program is useful for you. I like to receive feedback for improvements or bugs.**
+
+
+![alt text](https://github.com/MarijnInventor/Qr-Pos/blob/Version-1.0/qrpos%20screenshot.png?raw=true)
