@@ -1,9 +1,14 @@
-from settings import productsFile
 from openpyxl import load_workbook
+import os
+import configparser
+from getSettings import productsFile
+
+
 
 
 wb = load_workbook(productsFile)
 sheet = wb.active
+ 
 
 def searchForProductNr(qrContent):
     currentScan = int(qrContent)
@@ -12,20 +17,19 @@ def searchForProductNr(qrContent):
     cellInfo = "A0"
     price = 0.00
     product = "INVALID"
-    searchRange = [i for i in range(1001,5000)]
-
+    searchRange = [i for i in range(2,10000)]
+ 
     while(found == 0):
-        if(currentScan in searchRange):
-            #print('Qr code is: ' + str(currentScan))
+        if(currentRow in searchRange):
             cellValue = sheet.cell(row = currentRow, column = 3).value
+           
             if(cellValue == currentScan):
                 cellInfo = sheet['A' + str(currentRow)].value
                 if(str(cellInfo) == "None"):
-                    #print("No product found")
+                    print("ProductNr found but no valid name entered!")
                     found = 1
                     currentRow = 1
                 else:
-                    #print(str(currentScan) + " found in row " + str(currentRow))
                     cellInfo = "A" + str(currentRow)
                     product = sheet[cellInfo].value
                     cellInfo = "B" + str(currentRow)
@@ -35,7 +39,6 @@ def searchForProductNr(qrContent):
             else:
                 cellInfo = sheet['A' + str(currentRow)].value
                 if(cellInfo == "None"):
-                    #de errormessage staat in main.py
                     found = 1
                     currentRow = 1
                 else:
@@ -43,4 +46,5 @@ def searchForProductNr(qrContent):
         else:
             print("invalid QR code")
             found = 1
+           
     return (price, product)

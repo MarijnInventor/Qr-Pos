@@ -1,18 +1,16 @@
-from settings import receiptFile,beep,logo,currency
-from printReceipt import printReceipt
+from getSettings import productsFile,receiptFile,beep,logo,currency,camsource
 import tkinter as tk
 from tkinter import *
-from tkinter import messagebox
 import cv2
 import numpy as np
 import pyzbar.pyzbar as pyzbar
 import threading
-import simpleaudio as sa
+from playsound import playsound
 import time
 from SearchForProductNr import searchForProductNr
+from tkinter import messagebox as msgb
 
-beepSound = sa.WaveObject.from_wave_file(beep)
-
+line = '________________________________________'
 
 def main():
     window=tk.Tk()
@@ -29,6 +27,8 @@ def main():
 
     prices = []
     total = 0.00
+    
+        
         
     def undo():
         if(prices == []):
@@ -52,13 +52,14 @@ def main():
             text_box.insert(INSERT, new)
             text_box.see("end")
             text_box.config(state=DISABLED)
+            
 
 
     def scan():
         lastProduct = ''
         lastTime = 0.0
 
-        cap = cv2.VideoCapture(0)
+        cap = cv2.VideoCapture(int(camsource))
         font = cv2.FONT_HERSHEY_PLAIN
 
         while True:
@@ -69,35 +70,31 @@ def main():
                 qrContent = obj.data
                 price, product = searchForProductNr(qrContent)
                 textToWrite = product + '  -  ' + currency + str(price)
-                if(product == 'INVALID'):
-                    print('No product found - QrValue = ' + str(qrContent))
-                else:
-                    t = time.time()
-                    
-                    if(product != lastProduct or (t - lastTime) >= 1):
-                        prices.append(price)
-                        priceText = "{:.2f}".format(price)
-                        message = '\n' + product + '\n' +  currency + priceText + '\n________________________________________'
-                        writeText(message)
-                        print("price: " + currency + priceText + "   |   name: " + product)
-                    cv2.putText(frame, "price: " + priceText + "   name: " + product, (50, 50), font, 2, (255, 0, 0), 3)
+                t = time.time()
+                if product != lastProduct or (t - lastTime) >= 1:
+                    prices.append(price)
+                    priceText = "{:.2f}".format(price)
+                    message = '\n' + product + '\n' +  currency + priceText + '\n' + line
+                    writeText(message)
+                    print("price: " + currency + priceText + "   |   name: " + product)
+                        
+                lastTime = t
+                lastProduct = product
 
-                    lastTime = t
-                    lastProduct = product
-
-            cv2.imshow("Frame", frame)
-            
+                cv2.putText(frame, "price: " + priceText + "   name: " + product, (50, 50), font, 2, (255, 0, 0), 3)
+                
+            cv2.imshow("QR-Pos scanning window", frame)
             key = cv2.waitKey(1)
 
 
-            if cv2.getWindowProperty('Frame',cv2.WND_PROP_VISIBLE)<1:
+            if cv2.getWindowProperty('QR-Pos scanning window',cv2.WND_PROP_VISIBLE)<1:
                 break
         cv2.destroyAllWindows()
     
     def startScan():
         x = threading.Thread(target=scan, args=())
         x.start()
-        
+
 
     def payment():
         total = sum(float(t) for t in prices)
@@ -114,7 +111,7 @@ def main():
         price = 0.00
         with open(receiptFile, "w") as receipt:
             receipt.seek(0) # rewind
-            receipt.write(logo) # write the new line before
+            receipt.write(logo + "\n" + line) # write the new line before
         with open(receiptFile, "r") as receipt:
             currentText = receipt.read()
             
@@ -131,7 +128,7 @@ def main():
             receipt.write(currentText + text) # write the new stuff
 
     def writeText(text):
-        beepSound.play()
+        playsound(beep)
         writeinfile(text)
         with open(receiptFile, "r") as receipt:
             currentText = receipt.read()
@@ -141,17 +138,23 @@ def main():
         text_box.insert(INSERT, currentText)
         text_box.see("end")
         text_box.config(state=DISABLED)
+        
+    
+    
+    def printReceipt():
+        import printReceipt
+        
 
     clear()
     startScan()
     #The textbox is defined at the beginning of the code
-    payButton = Button(window,text='Pay',width=15,height=2,command=payment).pack(expand=True)
-    undoButton = Button(window,text='Undo',width=15,height=2,command=undo).pack(expand=True)
-    clearButton = Button(window,text='Clear',width=15,height=2,command=clear).pack(expand=True)
+    payButton = Button(window,text='Pay',width=10,height=2,command=payment).pack(pady=20,side = LEFT,expand=True)
+    undoButton = Button(window,text='Undo',width=10,height=2,command=undo).pack(pady=20,side = LEFT,expand=True)
+    clearButton = Button(window,text='Clear',width=10,height=2,command=clear).pack(pady=20,side = LEFT,expand=True)
     window.bind("<Return>", (lambda event: payment()))
     window.bind("<BackSpace>", (lambda event: undo()))
     window.bind("<Delete>", (lambda event: clear()))
-    window.bind("<KP_1>", (lambda event: printReceipt()))
+    window.bind("p", (lambda event: printReceipt()))
     window.mainloop()
 
 if __name__ == '__main__':
