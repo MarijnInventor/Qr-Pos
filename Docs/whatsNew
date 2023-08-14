@@ -1,0 +1,15 @@
+Some bug fixes and new features have been added in this version of QR-Pos. The most important things are listed below:
+
+
+---------------------------------------------New features
+- The GUI features a more modern style
+- From now on you can open the settings with one button, you don't have to start a separate program anymore.
+- I added requirements.txt so you can easily install all libraries
+
+
+
+
+---------------------------------------------Solved bugs
+- The settings menu no longer crashes if the config file is not correct
+- The notification after saving settings is no longer present, instead you can see it by the button.
+- From now on you can scan qr codes in the product add tool without the camera function of the main program blocking it. It won't crash anymore.
