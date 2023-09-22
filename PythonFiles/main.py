@@ -2,7 +2,7 @@ from getSettings import productsFile,receiptFile,beep,logo,currency,camsource
 import tkinter as tk
 import customtkinter
 from tkinter import *
-import cv2
+import cv2      ##test
 import sys
 import os
 import subprocess
