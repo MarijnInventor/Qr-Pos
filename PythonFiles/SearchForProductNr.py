@@ -26,7 +26,7 @@ def searchForProductNr(qrContent):
             if(cellValue == currentScan):
                 cellInfo = sheet['A' + str(currentRow)].value
                 if(str(cellInfo) == "None"):
-                    print("ProductNr found but no valid name entered!")
+                    print("No product found!")
                     found = 1
                     currentRow = 1
                 else:

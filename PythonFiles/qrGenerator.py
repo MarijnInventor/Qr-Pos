@@ -56,10 +56,10 @@ def qrGenerator():
         finished = 0
         if(lastNr < 1001):
             print("Error - LastNr must be between 1001 and 5000")
-            tk.messagebox.showerror(title='Error', message='Error - LastNr must be between 1001 and 5000')
+            CTkMessagebox(title='Error', message='Error - LastNr must be between 1001 and 5000')
         elif(lastNr > 5000):
             print("Error - LastNr must be between 1001 and 5000")
-            tk.messagebox.showerror(title='Error', message='Error - LastNr must be between 1001 and 5000')
+            CTkMessagebox(title='Error', message='Error - LastNr must be between 1001 and 5000')
         else:
             button_1.configure(text="Done")
             window.after(1500, lambda: button_1.configure(text="Generate"))
@@ -69,7 +69,7 @@ def qrGenerator():
                 if(currentNr < lastNr):
                     finished = 0
                 else:
-                    finished = CTkMessagebox(title="Finished", message="Your QR codes are succesfully generated: 1001 - " + str(lastNr))
+                    CTkMessagebox(title="Finished", message="Your QR codes are succesfully generated: 1001 - " + str(lastNr))
     
                 filename = str(currentNr) + ".png"
                 img = qrcode.make(currentNr)

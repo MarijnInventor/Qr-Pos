@@ -82,7 +82,7 @@ def addProducts():
                 print("There is no empty row avalible!")
                 found = 1
                 
-    def deleteproduct():
+    def deleteproduct(): #not used yet
         global currentRow
         global found
         currentRow = 2

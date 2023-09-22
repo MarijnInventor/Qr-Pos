@@ -12,6 +12,7 @@ import threading
 from playsound import playsound
 import time
 from SearchForProductNr import searchForProductNr
+from CTkMessagebox import CTkMessagebox
 
 line = '________________________________________'
 
@@ -77,17 +78,21 @@ def main():
             for obj in decodedObjects:
                 qrContent = obj.data
                 price, product = searchForProductNr(qrContent)
-                textToWrite = product + '  -  ' + currency + str(price)
-                t = time.time()
-                if product != lastProduct or (t - lastTime) >= 1:
-                    prices.append(price)
-                    priceText = "{:.2f}".format(price)
-                    message = '\n' + product + '\n' +  currency + priceText + '\n' + line
-                    writeText(message)
-                    print("price: " + currency + priceText + "   |   name: " + product)
-                        
-                lastTime = t
-                lastProduct = product
+                if product == "INVALID":
+                    CTkMessagebox(title="Product not found", message="This product was not found in the database")
+                    ##################################### Hier moet gewacht worden totdat de melding weggeklikt is!!!
+                else:
+                    textToWrite = product + '  -  ' + currency + str(price)
+                    t = time.time()
+                    if product != lastProduct or (t - lastTime) >= 1:
+                        prices.append(price)
+                        priceText = "{:.2f}".format(price)
+                        message = '\n' + product + '\n' +  currency + priceText + '\n' + line
+                        writeText(message)
+                        print("price: " + currency + priceText + "   |   name: " + product)
+                            
+                    lastTime = t
+                    lastProduct = product
 
                 cv2.putText(frame, "price: " + priceText + "   name: " + product, (50, 50), font, 2, (255, 0, 0), 3)
                 

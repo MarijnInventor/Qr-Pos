@@ -69,7 +69,7 @@ qrGenerator = customtkinter.CTkButton(master=menuwindow, command=qrGenerator, wi
 qrGenerator.pack(pady=20,side = LEFT,expand=True)
 settingsButton = customtkinter.CTkButton(master=menuwindow, command=changeSettings, width=100, height=100, text='Settings')
 settingsButton.pack(pady=20,side = LEFT,expand=True)
-exitButton = customtkinter.CTkButton(master=menuwindow, command=exitSettings, width=100, height=100, text='Exit')
+exitButton = customtkinter.CTkButton(master=menuwindow, command=exitSettings, width=100, height=100, text='Return')
 exitButton.pack(pady=20,side = LEFT,expand=True)
 
 menuwindow.mainloop()

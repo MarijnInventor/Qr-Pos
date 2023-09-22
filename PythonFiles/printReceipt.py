@@ -9,11 +9,11 @@ def showMessage(message):
     root = tk.Tk()
     root.withdraw()
     if message == 1:
-        root.after(1500, root.destroy)
-        CTkMessagebox(title="Print job started!", message="The print job has been sent successfully")
+        msgbox = CTkMessagebox(title="Print job started!", message="The print job has been sent successfully")
+        root.after(1500, msgbox.destroy)
     if message == 2:
-        CTkMessagebox(title="Printing failed!", message="Error\nThis feature only works on Winsows and Linux.",icon="cancel")
-
+        msgbox = CTkMessagebox(title="Printing failed!", message="Error\nThis feature only works on Winsows and Linux.",icon="cancel")
+        root.after(1500, msgbox.destroy)
 
 os_name = platform.system()
 
