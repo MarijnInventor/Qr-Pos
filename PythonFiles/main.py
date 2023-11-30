@@ -158,8 +158,12 @@ def main():
         import printReceipt
         
     def openMenu():
+        current_directory = os.path.dirname(os.path.realpath(__file__))
+        os.chdir(current_directory)
+
         subprocess.Popen(["python3", "config.py"])
         os._exit(0)
+        
         
         
 
