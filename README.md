@@ -3,7 +3,7 @@
 ```bash
 $ git clone https://github.com/MarijnInventor/Qr-Pos
 $ cd Qr-Pos
-$ pip install requirements.txt
+$ pip install -r requirements.txt
 ```
 # Running Qr-Pos
 ```bash
