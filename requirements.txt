@@ -3,6 +3,5 @@ customtkinter
 numpy
 opencv_python
 openpyxl
-playsound
 pyzbar
 qrcode
