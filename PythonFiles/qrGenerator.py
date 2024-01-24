@@ -17,7 +17,8 @@ def qrGenerator():
     customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
     window = customtkinter.CTk()
-    window.geometry("230x120")
+    window.geometry("300x140")
+    window.maxsize(300,140)
     window.title("QR-Pos - Qr generator")
     
     
@@ -65,16 +66,13 @@ def qrGenerator():
             window.after(1500, lambda: button_1.configure(text="Generate"))
     
     
-            while finished == 0:
-                if(currentNr < lastNr):
-                    finished = 0
-                else:
-                    CTkMessagebox(title="Finished", message="Your QR codes are succesfully generated: 1001 - " + str(lastNr))
-    
+            while currentNr <= lastNr:
                 filename = str(currentNr) + ".png"
                 img = qrcode.make(currentNr)
                 img.save(folder + filename)
                 currentNr += 1
+
+            CTkMessagebox(title="Finished", message="Your QR codes are succesfully generated: 1001 - " + str(lastNr))
     
     window.mainloop()
     
