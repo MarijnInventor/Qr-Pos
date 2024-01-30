@@ -5,6 +5,7 @@ import qrcode
 from tkinter import filedialog
 import customtkinter
 from CTkMessagebox import CTkMessagebox
+import os
 
 def qrGenerator():
     startNr = 1001
@@ -51,7 +52,11 @@ def qrGenerator():
 #     
     usr_input.focus()
     def generate():
-        folder = filedialog.askdirectory() + '/'
+        newdirname = "QrPos codes (" + str(usr_input.get()) + ")"
+        parentfolder = str(filedialog.askdirectory() + '/')
+        folder = os.path.join(parentfolder, newdirname) + '/'
+        os.mkdir(folder)
+
         lastNr = int(usr_input.get()) + 1000
         currentNr = startNr
         finished = 0
