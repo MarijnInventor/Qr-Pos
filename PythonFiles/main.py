@@ -9,7 +9,6 @@ import subprocess
 import numpy as np
 import pyzbar.pyzbar as pyzbar
 import threading
-from playsound import playsound
 import time
 from SearchForProductNr import searchForProductNr
 from CTkMessagebox import CTkMessagebox
@@ -141,7 +140,6 @@ def main():
             receipt.write(currentText + text) # write the new stuff
 
     def writeText(text):
-        playsound(beep)
         writeinfile(text)
         with open(receiptFile, "r") as receipt:
             currentText = receipt.read()

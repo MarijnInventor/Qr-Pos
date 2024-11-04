@@ -59,8 +59,13 @@ def qrGenerator():
 #     
     numberOf.focus()
     def generate():
-        lastNr = int(startNr.get()) + int(numberOf.get())
-        currentNr = int(startNr.get())
+        newdirname = "QrPos codes (" + str(usr_input.get()) + ")"
+        parentfolder = str(filedialog.askdirectory() + '/')
+        folder = os.path.join(parentfolder, newdirname) + '/'
+        os.mkdir(folder)
+
+        lastNr = int(usr_input.get()) + 1000
+        currentNr = startNr
         finished = 0
 
         if(lastNr < 1001 or lastNr > 5000):

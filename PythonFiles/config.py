@@ -5,7 +5,6 @@ import cv2
 import numpy as np
 import pyzbar.pyzbar as pyzbar
 import threading
-from playsound import playsound
 import time
 from SearchForProductNr import searchForProductNr
 from qrGenerator import qrGenerator
