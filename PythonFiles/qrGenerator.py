@@ -59,18 +59,14 @@ def qrGenerator():
 #     
     numberOf.focus()
     def generate():
-        newdirname = "QrPos codes (" + str(usr_input.get()) + ")"
-        parentfolder = str(filedialog.askdirectory() + '/')
-        folder = os.path.join(parentfolder, newdirname) + '/'
-        os.mkdir(folder)
-
-        lastNr = int(usr_input.get()) + 1000
-        currentNr = startNr
+        lastNr = int(startNr.get()) + int(numberOf.get())
+        currentNr = int(startNr.get())
         finished = 0
 
+
         if(lastNr < 1001 or lastNr > 5000):
-            print("Error - Make sure all numbers are within the range of 1001 and 5000")
-            CTkMessagebox(title='Error', message="Error - Make sure all numbers are within the range of 1001 and 5000")
+            print("Error - Make sure all numbers are within a range of 1001 and 5000")
+            CTkMessagebox(title='Error', message="Error - Make sure all numbers are within a range of 1001 and 5000")
         else:
             button_1.configure(text="Done")
             window.after(1500, lambda: button_1.configure(text="Generate"))
